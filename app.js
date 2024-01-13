@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/instaclone');
+// mongoose.connect(process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/instaclone');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -11,6 +12,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const passport = require('passport');
 var app = express();
+
+mongoose.connect('mongodb+srv://prathampawar6722:FWMm5FlbeIgYy4ix@cluster0.mfgf8gy.mongodb.net/?retryWrites=true&w=majority', {
+ useUnifiedTopology: true,
+ useNewUrlParser: true
+})
+ .then(() => {
+    console.log('Connected to MongoDB');
+ })
+ .catch((error) => {
+    console.error('Failed to connect to MongoDB', error);
+ });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
